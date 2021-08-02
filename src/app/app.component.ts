@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PokeApiService } from './services/pokeapi.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'poki-api';
+  constructor(private pokeApiService: PokeApiService){}
+
+  public name: string;
+  public id: string;
+
+  getPokemonInfo(pokemon){
+    this.pokeApiService.getPokemon(pokemon).subscribe((pokemonData) => {
+      this.name = pokemonData.name;
+      this.id = pokemonData.id;
+    })
+  }
 }
