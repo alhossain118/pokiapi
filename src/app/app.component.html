@@ -1,10 +1,6 @@
-Get Pokemon Data: <input type="text" #pokemonName>
-<button (click)="getPokemonInfo(pokemonName.value)">Get Pokemon Info</button>
-<br />
-<br />
-<br />
 
-<div>
-  Pokemon Name: {{name}}<br/>
-  Pokemon Id: {{id}}
+<div *ngIf="pokemonSet">
+  <div *ngFor="let pokemon of pokemonSet; let i = index">
+    {{i + 1}}) {{pokemon.name}}<br/>
+  </div>
 </div>

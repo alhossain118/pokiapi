@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Pokemon } from './interface/pokemon.interface';
 import { PokeApiService } from './services/pokeapi.service';
 
 @Component({
@@ -6,16 +7,18 @@ import { PokeApiService } from './services/pokeapi.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(private pokeApiService: PokeApiService){}
 
-  public name: string;
-  public id: string;
+  public pokemonSet: Pokemon[];
 
-  getPokemonInfo(pokemon){
-    this.pokeApiService.getPokemon(pokemon).subscribe((pokemonData) => {
-      this.name = pokemonData.name;
-      this.id = pokemonData.id;
+  ngOnInit(){
+    this.getPokemonInfo()
+  }
+
+  getPokemonInfo(){
+    this.pokeApiService.getAllPokemon().subscribe((pokemonData) => {
+      this.pokemonSet = pokemonData
     })
   }
 }
